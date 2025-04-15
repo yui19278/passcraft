@@ -45,7 +45,7 @@ public class AccountManager {
         }
     }
 
-    
+
 
     public void deleteAccount(String accountname) {
         String sql = "DELETE FROM accounts WHERE accountname = ?";
