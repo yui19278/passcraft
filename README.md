@@ -11,3 +11,9 @@ CREATE TABLE "accounts" (
 また、既に登録されているアカウント名が追加されようとすると、現時点では上書きして登録されます。
 
 登録の際の引数は、アカウント名、パスワード、パスワードの強度の順です。
+
+/libにsqlite-jdbc-3.49.1.0.jarを追加してください。
+バージョンは3.49.1.0
+
+ダウンロードURL
+https://github.com/xerial/sqlite-jdbc/releases
