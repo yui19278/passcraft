@@ -25,13 +25,38 @@ public class AccountManager {
         }
     }
 
+    public void showAccount(String accountname) {
+        String sql = "SELECT accountname, password, strength FROM accounts WHERE accountname = ?";
+    
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    
+            pstmt.setString(1, accountname);
+            ResultSet rs = pstmt.executeQuery();
+    
+            if (rs.next()) {
+                System.out.println("--------------------------");
+                System.out.println("Accountname: " + rs.getString("accountname"));
+                System.out.println("Password:    " + rs.getString("password"));
+                System.out.println("Strength:    " + rs.getString("strength"));
+                System.out.println("--------------------------");
+            } else {
+                System.out.println( accountname + " は見つかりませんでした。");
+            }
+    
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+
 
     public void showAccounts() {
         String sql = "SELECT accountname, password, strength FROM accounts";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 System.out.println("--------------------------");
@@ -46,12 +71,11 @@ public class AccountManager {
     }
 
 
-
     public void deleteAccount(String accountname) {
         String sql = "DELETE FROM accounts WHERE accountname = ?";
     
         try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
     
             pstmt.setString(1, accountname);
             pstmt.executeUpdate();

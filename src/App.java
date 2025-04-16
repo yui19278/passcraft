@@ -7,18 +7,21 @@ public class App {
         manager.addAccount("test2", "wf7bTif2i!", "強");
 
         //データ表示
+        System.out.println("すべてのデータを表示");
         manager.showAccounts();
-        System.out.println();
 
         //データ更新(上書き)
         manager.addAccount("test1", "ABC012", "弱");
 
         //データ表示(確認用)
-        manager.showAccounts();
+        System.out.println("更新後のtest1のデータのみ表示");
+        manager.showAccount("test1");
 
         //データ削除
+        System.out.println("更新後のデータを表示");
         manager.deleteAccount("test1");
         manager.deleteAccount("test2");
+        manager.showAccounts();
 
         
     }
