@@ -18,7 +18,7 @@ public class App {
         manager.showAccount("test1");
 
         //データ削除
-        System.out.println("更新後のデータを表示");
+        System.out.println("削除後のデータを表示");
         manager.deleteAccount("test1");
         manager.deleteAccount("test2");
         manager.showAccounts();
