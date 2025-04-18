@@ -15,11 +15,11 @@ const Game1 = () => {
         const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
         if (lengthCriteria && numberCriteria && uppercaseCriteria && specialCharCriteria) {
-            return { strength: '強い', reason: '十分に強いパスワードです！' };
+            return { strength: '強い', reason: 'いいね！十分に強いパスワードです！' };
         } else if (lengthCriteria && (numberCriteria || uppercaseCriteria)) {
-            return { strength: '中程度', reason: '少し工夫が必要です。記号や大文字を加えるとより強くなります。' };
+            return { strength: '中程度', reason: '少し工夫できるといいね！記号や大文字を加えるとより強くなるよ！' };
         } else {
-            return { strength: '弱い', reason: 'パスワードが短すぎます。8文字以上で、数字や記号を加えて強化しましょう。' };
+            return { strength: '弱い', reason: 'パスワードが短すぎるかな？？．8文字以上で，数字や記号を加えて強化しよう！' };
         }
     };
 
