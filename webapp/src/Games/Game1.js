@@ -5,6 +5,7 @@ const Game1 = () => {
     const [step, setStep] = useState(1);
     const [accountName, setAccountName] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [feedback, setFeedback] = useState('');
     const [strengthReason, setStrengthReason] = useState('');
     const [errors, setErrors] = useState({ accountName: false, password: false, message: '' });
@@ -44,6 +45,10 @@ const Game1 = () => {
         setStep(3);
     };
 
+    const togglePasswordView = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className="game-container">
             {step === 1 && (
@@ -72,13 +77,18 @@ const Game1 = () => {
                     />
 
                     <label>パスワード</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="パスワードを入力"
-                        className={errors.password ? 'input-error' : ''}
-                    />
+                    <div className="password-container">
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="パスワードを入力"
+                            className={errors.password ? 'input-error' : ''}
+                        />
+                        <button type="button" className="eye-button" onClick={togglePasswordView}>
+                            <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                        </button>
+                    </div>
 
                     <button onClick={handleSubmit}>アカウント作成</button>
                 </div>
