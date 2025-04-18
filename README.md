@@ -5,11 +5,11 @@ https://docs.google.com/document/d/1Q2kq-GOi3uF9o_w9XYD1DSBa9xBkdN4Iww7uigG5-aU/
 
 CREATE TABLE "accounts" (
 
-	"accountname"	TEXT,  //主キー 重複・空値不可
+	"accountname"  TEXT,  //主キー 重複・空値不可
 
-	"password"	TEXT NOT NULL, //空値不可
+	"password"  TEXT NOT NULL, //空値不可
 
-	"strength"	TEXT NOT NULL, //空値不可
+	"strength"  TEXT NOT NULL, //空値不可
 
 	PRIMARY KEY("accountname")
 
