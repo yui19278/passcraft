@@ -17,3 +17,8 @@ CREATE TABLE "accounts" (
 
 ダウンロードURL
 https://github.com/xerial/sqlite-jdbc/releases
+
+実行コマンド(Windows)
+passcraft>javac -d bin src/*.java
+
+passcraft>java -cp "lib/sqlite-jdbc-3.49.1.0.jar;bin" App
