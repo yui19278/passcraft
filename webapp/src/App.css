@@ -38,3 +38,8 @@
   }
 }
 
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 2px solid #ccc;
+}

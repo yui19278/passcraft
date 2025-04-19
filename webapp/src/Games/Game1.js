@@ -11,17 +11,70 @@ const Game1 = () => {
     const [errors, setErrors] = useState({ accountName: false, password: false, message: '' });
 
     const checkPasswordStrength = (password) => {
-        const lengthCriteria = password.length >= 8;
-        const numberCriteria = /\d/.test(password);
-        const uppercaseCriteria = /[A-Z]/.test(password);
-        const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        const lengthCriteria = password.length >= 8;      // 8文字以上（基本条件）
+        const longLengthCriteria = password.length >= 12; // 12文字以上（強い条件）
+        const veryLongLengthCriteria = password.length >= 16; // 16文字以上（非常に強い条件）
+        const numberCriteria = /\d/.test(password);       // 数字あり
+        const lowercaseCriteria = /[a-z]/.test(password); // 小文字あり
+        const uppercaseCriteria = /[A-Z]/.test(password); // 大文字あり
+        const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password); // 記号あり
+        const repeatCharCriteria = !/(.)\1{2,}/.test(password); // 同じ文字の連続を避ける
+        const commonPatterns = ['123456', 'password', 'qwerty', 'abc123'];
+        const containsCommonPattern = commonPatterns.some(pattern => password.toLowerCase().includes(pattern));
 
-        if (lengthCriteria && numberCriteria && uppercaseCriteria && specialCharCriteria) {
-            return { strength: '強い', reason: 'いいね！十分に強いパスワードだよ！' };
-        } else if (lengthCriteria && (numberCriteria || uppercaseCriteria)) {
-            return { strength: '中程度', reason: '少し工夫できるといいね！記号や大文字を加えるとより強くなるよ！' };
+        let score = 0;
+        if (lengthCriteria) score++;
+        if (longLengthCriteria) score++;
+        if (veryLongLengthCriteria) score++;
+        if (numberCriteria) score++;
+        if (lowercaseCriteria) score++;
+        if (uppercaseCriteria) score++;
+        if (specialCharCriteria) score++;
+        if (repeatCharCriteria) score++;
+        if (!containsCommonPattern) score++;
+
+        if (score >= 9 && veryLongLengthCriteria) { // 16文字以上 + 高スコア
+            return {
+                strength: '非常に強い',
+                reason: (
+                    <p className="reason-text">
+                        凄いね！完璧だよ！<br />
+                        他のアカウントでも，この強度を目指してパスワードを設定してね！
+                    </p>
+                )
+            };
+        } else if (score >= 7 && longLengthCriteria) { // 12文字以上 + 高スコア
+            return {
+                strength: '強い',
+                reason: (
+                    <p className="reason-text">
+                        もう少し工夫すれば，さらに強くできるよ！<br />
+                        例えば，記号や大文字を加えてみたらどうかな？？
+                    </p>
+                )
+            };
+        } else if (score >= 5) { // 中程度
+            return {
+                strength: '中程度',
+                reason: (
+                    <p className="reason-text">
+                        もう少し工夫できるといいね！<br />
+                        記号や大文字を加えるとより強くなるよ！<br />
+                        さらに長さを12文字以上にしてみたらどうかな？？
+                    </p>
+                )
+            };
         } else {
-            return { strength: '弱い', reason: 'パスワードが短すぎるかな？？8文字以上で，数字や記号を加えて強化しよう！' };
+            return {
+                strength: '弱い',
+                reason: (
+                    <p className="reason-text">
+                        パスワードが短すぎるかな？<br />
+                        8文字以上で，数字や記号を加えて強化しよう！<br />
+                        同じ文字の繰り返しを避けるようにしてね！
+                    </p>
+                )
+            };
         }
     };
 
@@ -29,11 +82,20 @@ const Game1 = () => {
         const hasAccountError = accountName.trim() === '';
         const hasPasswordError = password.trim() === '';
 
+        if (password.length > 20) {
+            setErrors({
+                accountName: hasAccountError,
+                password: true,
+                message: 'パスワードは最大20文字にしてください．'
+            });
+            return;
+        }
+
         if (hasAccountError || hasPasswordError) {
             setErrors({
                 accountName: hasAccountError,
                 password: hasPasswordError,
-                message: 'アカウント名とパスワードを入力してください。'
+                message: 'アカウント名とパスワードを入力してください．'
             });
             return;
         }
@@ -42,7 +104,12 @@ const Game1 = () => {
         const result = checkPasswordStrength(password);
         setFeedback(result.strength);
         setStrengthReason(result.reason);
-        setStep(3);
+
+        if (result.strength === '強い' || result.strength === '非常に強い') {
+            setStep(4);
+        } else {
+            setStep(3);
+        }
     };
 
     const togglePasswordView = () => {
@@ -52,15 +119,19 @@ const Game1 = () => {
     return (
         <div className="game-container">
             {step === 1 && (
-                <div className="welcome-screen">
+                <div className="welcome-screen fade-in">
                     <h1>ようこそ！FriendNestへ！</h1>
-                    <p>新しいSNSの世界が始まります．アカウントを作成して冒険を始めよう！</p>
+                    <p className="question-text">みんなはどうやってパスワードを決めてる？<br />ここで強度を試してみよう！</p>
+                    <hr />
+                    <p>最近新しくFriendNestってSNSが流行ってるみたい！</p>
+                    <p>どんなSNSだろう...？</p>
+                    <p>早速アカウントを作ってみよう！</p>
                     <button onClick={() => setStep(2)}>はじめる</button>
                 </div>
             )}
 
             {step === 2 && (
-                <div className="form-screen">
+                <form className="form-screen fade-in" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
                     <h2>アカウント作成</h2>
 
                     {errors.message && (
@@ -90,15 +161,27 @@ const Game1 = () => {
                         </button>
                     </div>
 
-                    <button onClick={handleSubmit}>アカウント作成</button>
-                </div>
+                    <button type="submit">アカウント作成</button>
+                </form>
             )}
 
             {step === 3 && (
-                <div className="feedback-screen">
+                <div className="feedback-screen fade-in">
                     <h3>パスワード強度: {feedback}</h3>
                     <p>{strengthReason}</p>
                     <button onClick={() => setStep(2)}>もう一度試す</button>
+                </div>
+            )}
+
+            {step === 4 && (
+                <div className="success-screen fade-in">
+                    <h2>おめでとう！</h2>
+                    <p className="reason-text">
+                        {feedback}パスワードが作れたよ！
+                    </p>
+                    {strengthReason}
+                    <p>大学生活でも使用するパスワードに気を付けよう！</p>
+                    <button onClick={() => window.location.href = '/webapp/app'}>ホームに戻る</button>
                 </div>
             )}
         </div>
