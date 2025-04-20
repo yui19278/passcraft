@@ -123,10 +123,12 @@ const Game1 = () => {
                     <h1>ようこそ！FriendNestへ！</h1>
                     <p className="question-text">みんなはどうやってパスワードを決めてる？<br />ここで強度を試してみよう！</p>
                     <hr />
-                    <p>最近新しくFriendNestってSNSが流行ってるみたい！</p>
-                    <p>どんなSNSだろう...？</p>
+                    <p>
+                        最近新しくFriendNestってSNSが流行ってるみたい！<br />
+                        どんなSNSだろう...？
+                    </p>
                     <p>早速アカウントを作ってみよう！</p>
-                    <button onClick={() => setStep(2)}>はじめる</button>
+                    <button onClick={() => setStep(2)}>ゲームを始める！</button>
                 </div>
             )}
 

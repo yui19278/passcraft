@@ -62,12 +62,12 @@
     opacity: 0.9;
 }
 
-.safe-button {
+.button-group .safe-button {
     background-color: #007bff;
     color: white;
 }
 
-.danger-button {
+.button-group .danger-button {
     background-color: #dc3545;
     color: white;
 }

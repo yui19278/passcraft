@@ -101,12 +101,14 @@ const Game2 = () => {
             {step === "intro" && (
                 <div className="fade-in">
                     <h1>ようこそ！ISL-Lookへ！</h1>
-                    <p className="question-text">フィッシングメールを見抜く力，どれだけあるかな？<br />ここで試してみよう！</p>
+                    <p className="question-text">フィッシングメールを見抜く力どれだけある？<br />ここで試してみよう！</p>
                     <hr />
-                    <p>大学で使用するISL-Lookというメールソフトに，様々なメールが届きました．</p>
-                    <p>最近流行ってるフィッシングメールかも...？</p>
+                    <p>
+                        大学で使用するISL-Lookというメールソフトに，様々なメールが届きました．<br />
+                        最近流行ってるフィッシングメールかも...？
+                    </p>
                     <p>慎重に確認していこう...！</p>
-                    <button onClick={() => setStep("question")}>はじめる</button>
+                    <button onClick={() => setStep("question")}>ゲームを始める！</button>
                 </div>
             )}
 
@@ -135,7 +137,7 @@ const Game2 = () => {
                     </div>
                     <div className="button-group">
                         <button onClick={nextQuestion}>
-                            {current + 1 === questions.length ? "結果発表" : "次の問題へ"}
+                            {current + 1 === questions.length ? "結果を見る" : "次の問題へ"}
                         </button>
                     </div>
                 </div>
@@ -144,7 +146,7 @@ const Game2 = () => {
             {step === "finish" && (
                 <div className="fade-in">
                     <div className="feedback-box">
-                        <h2>おつかれさま！どうだったかな？</h2>
+                        <h2>おつかれさま！どうだった？</h2>
                         <p>スコア：<strong>{score} / {questions.length}</strong></p>
                         <hr />
                         <h3>解答履歴：</h3>
@@ -168,8 +170,8 @@ const Game2 = () => {
             {step === "done" && (
                 <div className="fade-in">
                     <div className="feedback-box">
-                        <h2>コンプリート！全問クリア！✨</h2>
-                        <p>完璧だね！もう復習する問題はないよ 🎉</p>
+                        <h2>おめでとう！全問クリア！</h2>
+                        <p>完璧だね！もう復習する問題はないよ！</p>
                     </div>
                     <div className="button-group">
                         <button onClick={() => window.location.href = "/webapp/app"}>ホームに戻る</button>
