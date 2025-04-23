@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class AccountManager {
     private static final String DB_URL = "jdbc:sqlite:accounts.db";
 
-    public void addAccount(String accountname, String password, String strength) {
+    public void addAccount(String accountname, String password, Integer strength) {
         String sql = "INSERT OR REPLACE INTO accounts(accountname, password, strength) VALUES(?, ?, ?)";
 
 
@@ -17,7 +17,7 @@ public class AccountManager {
 
             pstmt.setString(1, accountname);
             pstmt.setString(2, password);
-            pstmt.setString(3, strength);
+            pstmt.setInt(3, strength);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

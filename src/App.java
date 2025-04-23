@@ -3,15 +3,15 @@ public class App {
         AccountManager manager = new AccountManager();
 
         //データ追加
-        manager.addAccount("test1", "abc012", "弱");
-        manager.addAccount("test2", "wf7bTif2i!", "強");
+        manager.addAccount("test1", "abc012", 10);
+        manager.addAccount("test2", "wf7bTif2i!", 100);
 
         //データ表示
         System.out.println("すべてのデータを表示");
         manager.showAccounts();
 
         //データ更新(上書き)
-        manager.addAccount("test1", "ABC012", "弱");
+        manager.addAccount("test1", "ABC012", 12);
 
         //データ表示(確認用)
         System.out.println("更新後のtest1のデータのみ表示");
