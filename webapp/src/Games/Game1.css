@@ -1,19 +1,33 @@
 /* Game1.css */
 .game-container {
     font-family: Arial, sans-serif;
-    max-width: 600px;
-    /* 横幅を広げて余裕を持たせる */
-    margin: 125px auto;
-    /* 上下の余白と中央揃え */
+    max-width: 700px;
+    /* Game2と統一 */
+    margin: 60px auto;
+    /* 上下余白を調整 */
     padding: 30px;
-    /* 全体の余白を増やす */
     background-color: #ffffff;
-    /* 白背景に変更 */
     border-radius: 12px;
-    /* より柔らかく */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    /* より柔らかい影 */
     text-align: center;
+    overflow: hidden;
+}
+
+/* フェードインアニメーション */
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h1 {
@@ -104,4 +118,18 @@ button:hover {
     cursor: pointer;
     color: #666;
     font-size: 1.2em;
+}
+
+.question-text {
+    margin-top: 2.0em;
+}
+
+.reason-text {
+    margin-top: 1.5em;
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 2px solid #ccc;
 }
