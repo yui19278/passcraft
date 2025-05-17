@@ -75,10 +75,10 @@ const Game3 = () => {
                 <h2>📸 スマホからの情報漏洩を防げ！</h2>
                 <p className="question-text">
                     SNSに投稿した写真から色んな情報が分かるって知ってた？<br />
-                    どんな情報が読み取れるかここで試してみよう！
+                    どんな情報が読み取れるか試してみよう！
                 </p>
                 <hr />
-                <p>あなたのSNSにある写真がアップされました.<br />でもその写真には意外な「手がかり」が...</p>
+                <p>あなたのSNSに，ある写真がアップされました.<br />でもその写真には意外な「手がかり」が...</p>
                 <p>あなたはこの写真から何を読み取れる？<br />調査を開始して，隠された情報を探し出そう！</p>
                 <div className="button-group">
                     <button onClick={() => setStarted(true)}>ゲームを始める！</button>
@@ -154,9 +154,13 @@ const Game3 = () => {
                             {history.map((item, i) => (
                                 <li key={i} style={{ marginBottom: "1em" }}>
                                     <strong>【問題{i + 1}】</strong>
-                                    {item.userAnswer.trim().toLowerCase() === item.correctAnswer.trim().toLowerCase()
-                                        ? "✅ 正解"
-                                        : "❌ 不正解"}<br />
+                                    {Array.isArray(item.correctAnswers)
+                                        ? item.correctAnswers.map(a => a.trim().toLowerCase()).includes(item.userAnswer.trim().toLowerCase())
+                                            ? " ✅ 正解"
+                                            : " ❌ 不正解"
+                                        : item.userAnswer.trim().toLowerCase() === item.correctAnswer.trim().toLowerCase()
+                                            ? " ✅ 正解"
+                                            : " ❌ 不正解"}<br />
                                     {item.question}<br />
                                     あなたの回答：{item.userAnswer}<br />
                                     正解：
@@ -172,6 +176,7 @@ const Game3 = () => {
                     </div>
                 </div>
             )}
+
             {step === 'summary2' && (
                 <div className="fade-in">
                     <h2>おわりに</h2>

@@ -29,6 +29,10 @@
     }
 }
 
+.question-text {
+    margin-top: 2.0em;
+}
+
 .button-group {
     display: flex;
     justify-content: center;
