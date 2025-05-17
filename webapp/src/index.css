@@ -1,0 +1,53 @@
+/* 全体の余白とパディングをリセット */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* コード部分のフォントスタイル */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* フィルタ検索や他要素がナビバーに合わせて下に配置されるよう調整 */
+.content {
+  margin-top: 56px;
+  /* ナビバーの高さを手動で指定 */
+}
+
+/* 固定ナビゲーションバー */
+.navbar {
+  position: relative;
+  /* 位置を変更して、固定を解除 */
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* フィルタ検索エリアの余白をリセット */
+.p-3.bg-light {
+  margin-top: 0 !important;
+  /* 上余白ゼロに固定 */
+}
+
+/* mainタグに対するスタイル */
+main {
+  margin-top: 0 !important;
+  /* mainタグの上部マージンを固定 */
+}
+
+/* 必要に応じてBootstrapコンテナや行の余白も削除 */
+.container-fluid,
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+.bg-dark-green {
+  background-color: #8dc223;
+  /* 藍色 */
+}
