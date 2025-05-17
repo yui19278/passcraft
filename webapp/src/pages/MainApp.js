@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { FaEnvelope, FaKey } from 'react-icons/fa'; // FaKey = 🔑, FaEnvelope = 📧
+import { FaEnvelope, FaKey, FaUserSecret } from 'react-icons/fa'; // FaKey = 🔑, FaEnvelope = 📧
 import CardComponent from '../components/CardComponent';
 
 const MainApp = () => {
@@ -10,7 +10,7 @@ const MainApp = () => {
                 <h2>ようこそ！情報セキュリティ研究室へ！</h2>
                 <hr />
                 <p>ここでは，ゲームを通して<strong>情報セキュリティ</strong>の啓発活動を行います．<br />全４つのシナリオに挑戦しよう！🎶</p>
-                <p>シナリオ①：パスワードの強度判定<br />シナリオ②：フィッシングメールの判別<br />シナリオ③：Coming soon...<br />シナリオ④：Coming soon...</p>
+                <p>シナリオ①：パスワードの強度判定<br />シナリオ②：フィッシングメールの判別<br />シナリオ③：SNS投稿の危険性<br />シナリオ④：Coming soon...</p>
             </div>
 
             {/* カードセクション */}
@@ -35,9 +35,9 @@ const MainApp = () => {
                     <Col md={3}>
                         <CardComponent
                             title="シナリオ③"
-                            description="Coming soon..."
+                            description="SNSに潜む危険性…"
                             route="/webapp/app/game3"
-                            icon="🕵️"
+                            icon={<FaUserSecret />}
                         />
                     </Col>
                     <Col md={3}>
