@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Game1.css';
 
 const Game1 = () => {
@@ -78,7 +78,7 @@ const Game1 = () => {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const hasAccountError = accountName.trim() === '';
         const hasPasswordError = password.trim() === '';
 
@@ -102,7 +102,20 @@ const Game1 = () => {
 
         setErrors({ accountName: false, password: false, message: '' });
         const result = checkPasswordStrength(password);
-        setFeedback(result.strength);
+
+  try {
+    const res = await fetch("/addAccount", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ username: accountName, password })
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  } catch (e) {
+    alert("保存失敗: " + e.message);
+    return;
+  }
+
+        setFeedback(result.strength);        
         setStrengthReason(result.reason);
 
         if (result.strength === '強い' || result.strength === '非常に強い') {
