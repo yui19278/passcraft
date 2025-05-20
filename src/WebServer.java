@@ -1,8 +1,5 @@
 package src;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-
 
 public class WebServer {
 
@@ -11,14 +8,13 @@ public class WebServer {
         Server server = new Server(8080);
 
         // 2) コンテキスト / を用意
-        ServletContextHandler ctx =
-            new ServletContextHandler(ServletContextHandler.SESSIONS);
+        ServletContextHandler ctx = new ServletContextHandler(ServletContextHandler.SESSIONS);
         ctx.setContextPath("/");
 
         // 3) サーブレットを登録
-        ctx.addServlet(AccountServlet.class,  "/addAccount");
+        ctx.addServlet(AccountServlet.class, "/addAccount");
         ctx.addServlet(RankingServlet.class, "/api/ranking");
-        ctx.addServlet(ResetServlet.class,   "/resetRanking");
+        ctx.addServlet(ResetServlet.class, "/resetRanking");
 
         server.setHandler(ctx);
 

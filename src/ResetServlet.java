@@ -1,17 +1,11 @@
 package src;
 
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.ServletException;
 import java.io.IOException;
 
 /**
- * ランキングをリセットするサーブレット
- * POST /resetRanking で呼び出す
+ * ランキングをリセットするサーブレット POST /resetRanking で呼び出す
  */
-@WebServlet("/resetRanking")               // ← お好み（WebServer 側と揃えれば OK）
+@WebServlet("/resetRanking") // ← お好み（WebServer 側と揃えれば OK）
 public class ResetServlet extends HttpServlet {
 
     @Override

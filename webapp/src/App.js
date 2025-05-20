@@ -1,16 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js"; // BootstrapのJSファイルをインポート
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./components/Layout"; // Layoutをインポート
-import Game1 from './Games/Game1'; // ゲームページ
-import Game2 from './Games/Game2'; // ゲームページ
-import Game3 from './Games/Game3'; // ゲームページ
-import Game4 from './Games/Game4'; // ゲームページ
-import './index.css';
-import MainApp from './pages/MainApp'; // MainAppをインポート
+import Game1 from "./Games/Game1"; // ゲームページ
+import Game2 from "./Games/Game2"; // ゲームページ
+import Game3 from "./Games/Game3"; // ゲームページ
+import Game4 from "./Games/Game4"; // ゲームページ
+import "./index.css";
+import MainApp from "./pages/MainApp"; // MainAppをインポート
 import Ranking from "./pages/Ranking"; // アナリティクスページ用コンポーネント
 import Settings from "./pages/Settings"; // アナリティクスページ用コンポーネント
-
 
 export default function App() {
   return (
