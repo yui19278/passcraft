@@ -1,3 +1,4 @@
+package src;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -6,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
 
 import com.google.gson.Gson;
 
@@ -30,13 +32,14 @@ public class RankingServlet extends HttpServlet {
     }
 
 
-public void resetAccounts() {
-    String sql = "DELETE FROM accounts";
+// public void resetAccounts() {
+//     String sql = "DELETE FROM accounts";
     
-    try (Connection conn = DriverManager.getConnection(DB_URL);
-         Statement stmt = conn.createStatement()) {
-        stmt.executeUpdate(sql);
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}}
+//     try (Connection conn = DriverManager.getConnection(DB_URL);
+//          Statement stmt = conn.createStatement()) {
+//         stmt.executeUpdate(sql);
+//     } catch (SQLException e) {
+//         e.printStackTrace();
+//     }
+// }
+}

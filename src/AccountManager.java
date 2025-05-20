@@ -1,12 +1,25 @@
+package src;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountManager {
     private static final String DB_URL = "jdbc:sqlite:accounts.db";
+	
+	public void resetAccounts() {
+    String sql = "DELETE FROM accounts";
+    try (Connection conn = DriverManager.getConnection(DB_URL);
+         Statement stmt = conn.createStatement()) {
+        stmt.executeUpdate(sql);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 	
 	    static {
         try (Connection conn = DriverManager.getConnection(DB_URL);
@@ -102,20 +115,18 @@ public class AccountManager {
             e.printStackTrace();
         }
     }
+	
+	public List<AccountRecord> getAccountsByStrengthDesc() {
+    String sql = "SELECT accountname, strength FROM accounts ORDER BY strength DESC";
+    List<AccountRecord> list = new ArrayList<>();
+    try (Connection conn = DriverManager.getConnection(DB_URL);
+         Statement stmt = conn.createStatement();
+         ResultSet rs   = stmt.executeQuery(sql)) {
+        while (rs.next()) {
+            list.add(new AccountRecord(rs.getString("accountname"),
+                                       rs.getInt("strength")));
+        }
+    } catch (SQLException e) { e.printStackTrace(); }
+    return list;
 }
-
-public class AccountRecord {
-    private final String name;
-    private final int score;
-
-    public AccountRecord(String name, int score) {
-        this.name = name;
-        this.score = score;
-    }
-    public String getName() {
-        return name;
-    }
-    public int getScore() {
-        return score;
-    }
 }

@@ -1,3 +1,4 @@
+package src;
 public class PasswordUtil {
     // パスワード強度スコアを計算する
     public static int calculateScore(String password) {
