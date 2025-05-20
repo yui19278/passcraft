@@ -28,3 +28,6 @@ logs/
 # OS 固有ファイル
 .DS_Store
 Thumbs.db
+
+# packageの生成物
+package-lock.json
