@@ -1,24 +1,34 @@
-// import React from "react";
-
-// function Settings() {
-// 　return (
-//     <div>
-//     　<h2>設定ページ</h2>
-//     　<p>ここでは，Webアプリの設定を行います．</p>
-//     </div>
-// 　);
-// }
+// const handleReset = async () => {
+//     if(!window.confirm("ランキングをリセットしますか？")) return;
+//     const response = await fetch('/api/reset', {method : 'DELETE'});
+//     if(!response.ok) {
+//         alert("ランキングをリセットしました");
+//     } else {
+//         alert("ランキングのリセットに失敗しました");
+//     }
+//     <button onClick={handleReset}>ランキングをリセット</button>
+// };
 
 // export default Settings;
 
-const handleReset = async () => {
-    if(!window.confirm("ランキングをリセットしますか？")) return;
-    const response = await fetch('/api/reset', {method : 'DELETE'});
-    if(!response.ok) {
-        alert("ランキングをリセットしました");
-    } else {
-        alert("ランキングのリセットに失敗しました");
-    }
-};
+function Settings() {
+  const handleReset = async () => {
+    if (!window.confirm("ランキングをリセットしますか？")) return;
+    const response = await fetch("/resetRanking", { method: "POST" });
 
-<button onClick={handleReset}>ランキングをリセット</button>
+    if (response.ok) {
+      alert("ランキングをリセットしました");
+    } else {
+      alert("ランキングのリセットに失敗しました");
+    }
+  };
+
+  // JSX を返す
+  return (
+    <div style={{ padding: "1rem" }}>
+      <button onClick={handleReset}>ランキングをリセット</button>
+    </div>
+  );
+}
+
+export default Settings;

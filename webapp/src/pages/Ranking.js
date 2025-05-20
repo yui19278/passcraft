@@ -20,6 +20,10 @@ function Ranking() {
           .then(data => setRankingList(data))
           .catch(err => console.error(err));
     }, []);
+
+    
+    if (!rankingList.length) return <p>ランキングがありません</p>;
+
     return (
         <div>
           <h2>パスワード強度ランキング</h2>

@@ -31,6 +31,7 @@ public class AccountServlet extends HttpServlet {
         manager.addAccount(username, password, score);
         
         // （必要に応じて）レスポンス処理、例: ランキングページへリダイレクト
-        resp.sendRedirect(req.getContextPath() + "/app/ranking");
+        // resp.sendRedirect(req.getContextPath() + "/app/ranking");
+        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
     }
 }
