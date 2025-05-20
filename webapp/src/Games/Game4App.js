@@ -1,5 +1,5 @@
 // src/components/Game4App.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Game4App = ({ onFinish }) => {
     const [score, setScore] = useState(0);
@@ -20,7 +20,7 @@ const Game4App = ({ onFinish }) => {
     return (
         <div className="fade-in">
             <h2>🎮 TapMonster</h2>
-            <p>画面をタップしてモンスターを倒そう！</p>
+            <p>画面をタップしてモンスターを倒そう！！</p>
             <div style={{ fontSize: '5em', margin: '1em 0' }}>
                 👾
             </div>
