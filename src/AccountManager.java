@@ -7,13 +7,31 @@ import java.sql.Statement;
 
 public class AccountManager {
     private static final String DB_URL = "jdbc:sqlite:accounts.db";
+	
+	    static {
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement  stmt = conn.createStatement()) {
+
+            String ddl = """
+                CREATE TABLE IF NOT EXISTS accounts (
+                  accountname TEXT PRIMARY KEY,
+                  password    TEXT,
+                  strength    INTEGER
+                );
+                """;
+            stmt.executeUpdate(ddl);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addAccount(String accountname, String password, Integer strength) {
         String sql = "INSERT OR REPLACE INTO accounts(accountname, password, strength) VALUES(?, ?, ?)";
 
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, accountname);
             pstmt.setString(2, password);
@@ -52,7 +70,7 @@ public class AccountManager {
 
 
     public void showAccounts() {
-        String sql = "SELECT accountname, password, strength FROM accounts";
+        String sql = "SELECT accountname, password, strength FROM accounts ORDER BY strength DESC";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
             Statement stmt = conn.createStatement();
@@ -83,5 +101,21 @@ public class AccountManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+}
+
+public class AccountRecord {
+    private final String name;
+    private final int score;
+
+    public AccountRecord(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+    public String getName() {
+        return name;
+    }
+    public int getScore() {
+        return score;
     }
 }
