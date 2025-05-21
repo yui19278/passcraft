@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Game4.css';
-import Game4App from './Game4App';
+
+const monsterList = [
+    { name: "スライム", hp: 5, score: 10, emoji: "🟢" },
+    { name: "ゴブリン", hp: 10, score: 20, emoji: "👹" },
+    { name: "ドラゴン", hp: 20, score: 40, emoji: "🐉" }
+];
 
 const Game4 = () => {
     const [step, setStep] = useState("intro");
@@ -17,6 +22,56 @@ const Game4 = () => {
         setPermissions(prev => ({ ...prev, [key]: !prev[key] }));
     };
 
+    const Game4App = ({ onFinish }) => {
+        const [score, setScore] = useState(0);
+        const [currentMonster, setCurrentMonster] = useState(generateMonster());
+        const [currentHP, setCurrentHP] = useState(currentMonster.hp);
+        const [timeLeft, setTimeLeft] = useState(30);
+
+        function generateMonster() {
+            const index = Math.floor(Math.random() * monsterList.length);
+            return monsterList[index];
+        }
+
+        useEffect(() => {
+            if (timeLeft <= 0) {
+                if (onFinish) onFinish(score);
+                return;
+            }
+            const timer = setInterval(() => {
+                setTimeLeft(prev => prev - 1);
+            }, 1000);
+            return () => clearInterval(timer);
+        }, [timeLeft, onFinish, score]);
+
+        const handleClick = () => {
+            const attack = Math.floor(Math.random() * 4) + 1;
+            const newHP = currentHP - attack;
+            if (newHP <= 0) {
+                setScore(score + currentMonster.score);
+                const newMonster = generateMonster();
+                setCurrentMonster(newMonster);
+                setCurrentHP(newMonster.hp);
+            } else {
+                setCurrentHP(newHP);
+            }
+        };
+
+        return (
+            <div className="fade-in">
+                <h2>🎮 TapMonster 改</h2>
+                <p>制限時間内にできるだけ多くのモンスターを倒そう！</p>
+                <div style={{ fontSize: '5em', margin: '1em 0' }}>{currentMonster.emoji}</div>
+                <p><strong>{currentMonster.name}</strong>（HP: {currentHP}）</p>
+                <button onClick={handleClick} style={{ padding: '1em 2em', fontSize: '1.2em' }}>
+                    攻撃！
+                </button>
+                <p>スコア: <strong>{score}</strong></p>
+                <p>残り時間: {timeLeft} 秒</p>
+            </div>
+        );
+    };
+
     if (step === "intro") {
         return (
             <div className="game-container fade-in">
@@ -30,9 +85,7 @@ const Game4 = () => {
                     今日はISLから新作のゲームがリリースされるよ！<br />
                     発売前から物凄い話題だったね！何でも，新しい機能がいっぱいあるみたい…？
                 </p>
-                <p>
-                    早速インストールして始めよう！
-                </p>
+                <p>早速インストールして始めよう！</p>
                 <div className="button-group">
                     <button onClick={() => setStep("permissions")}>アプリをインストール</button>
                 </div>
@@ -50,12 +103,11 @@ const Game4 = () => {
                 </p>
                 <div className="permission-box">
                     <ul>
-                        <li>{permissions.notification ? "✔️ 通知の送信を許可" : "❌ 通知の送信を許可しない"}</li>
-                        <li>{permissions.location ? "✔️ 位置情報の取得を許可" : "❌ 位置情報の取得を許可しない"}</li>
-                        <li>{permissions.camera ? "✔️ カメラの使用を許可" : "❌ カメラの使用を許可しない"}</li>
-                        <li>{permissions.contacts ? "✔️ 連絡先へのアクセスを許可" : "❌ 連絡先へのアクセスを許可しない"}</li>
-                        <li>{permissions.media ? "✔️ 写真・動画ライブラリへのアクセスを許可" : "❌ 写真・動画ライブラリへのアクセスを許可しない"}</li>
-                        <li>{permissions.battery ? "✔️ バッテリー使用状況の確認を許可" : "❌ バッテリー使用状況の確認を許可しない"}</li>
+                        {Object.keys(permissions).map(key => (
+                            <li key={key}>
+                                {permissions[key] ? `✔️ ${key} を許可` : `❌ ${key} を許可しない`}
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 <p>※これらの情報はゲームプレイの最適化に使用されます.</p>
