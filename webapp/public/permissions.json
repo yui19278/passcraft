@@ -1,0 +1,43 @@
+[
+  {
+    "permissions": [
+      "位置情報（常に）",
+      "連絡先へのアクセス",
+      "端末内ストレージの読み取り/書き込み"
+    ],
+    "isSafe": false,
+    "explanation": "ゲーム機能に不要な連絡先・常時位置情報は過剰です。"
+  },
+  {
+    "permissions": [
+      "カメラの使用",
+      "マイクの使用"
+    ],
+    "isSafe": true,
+    "explanation": "AR撮影アプリなどでは妥当な組み合わせです。"
+  },
+  {
+    "permissions": [
+      "SMSの送信",
+      "バックグラウンドでの位置情報取得"
+    ],
+    "isSafe": false,
+    "explanation": "SMS送信は料金トラブルの恐れ。"
+  },
+  {
+    "permissions": [
+      "通知の送信",
+      "インターネットアクセス"
+    ],
+    "isSafe": true,
+    "explanation": "オンラインゲームでよくある標準的な権限です。"
+  },
+  {
+    "permissions": [
+      "端末ID・通話情報の取得",
+      "連絡先の読み取り"
+    ],
+    "isSafe": false,
+    "explanation": "個人特定に直結する情報を複数要求しておりリスクが高いです。"
+  }
+]
