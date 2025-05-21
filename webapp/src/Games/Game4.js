@@ -159,7 +159,7 @@ const Game4 = () => {
 
       {step === 'done' && (
         <div className="fade-in">
-          <h2>復習終了！完璧だね！</h2>
+          <h2>復習終了！完璧だね！ </h2>
           <button onClick={() => window.location.href = "/webapp/app"}>ホームに戻る</button>
         </div>
       )}
